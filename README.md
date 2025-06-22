@@ -1,2 +1,2 @@
-## ITS Just my portfolio!
-# Check it out
+# Its Just My Portfolio!
+### Check it out
