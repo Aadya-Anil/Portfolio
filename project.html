@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech & ML Projects Showcase</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .project-card {
+            transition: all 0.3s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .tech-tag {
+            transition: all 0.2s ease;
+        }
+        .tech-tag:hover {
+            transform: scale(1.05);
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .project-modal {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .project-modal.hidden {
+            opacity: 0;
+            transform: scale(0.9);
+            pointer-events: none;
+        }
+        .project-modal.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Header -->
+    <header class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-6 py-12">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <h1 class="text-4xl font-bold">Tech Projects Hub</h1>
+                    <p class="mt-2 text-xl opacity-90">Showcasing innovative ML & technology projects</p>
+                </div>
+                <div class="flex space-x-4">
+                    <button id="filter-all" class="px-4 py-2 bg-white text-purple-700 rounded-full font-semibold shadow-md hover:bg-gray-100 transition">All</button>
+                    <button id="filter-ml" class="px-4 py-2 bg-white bg-opacity-20 rounded-full font-medium hover:bg-opacity-30 transition">ML/AI</button>
+                    <button id="filter-web" class="px-4 py-2 bg-white bg-opacity-20 rounded-full font-medium hover:bg-opacity-30 transition">Web</button>
+                    <button id="filter-data" class="px-4 py-2 bg-white bg-opacity-20 rounded-full font-medium hover:bg-opacity-30 transition">Data</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12">
+        <!-- Search and Sort -->
+        <div class="flex flex-col md:flex-row justify-between items-center mb-12 gap-4">
+            <div class="relative w-full md:w-96">
+                <input type="text" placeholder="Search projects..." class="w-full pl-10 pr-4 py-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                <i class="fas fa-search absolute left-3 top-3.5 text-gray-400"></i>
+            </div>
+            <div class="flex items-center space-x-2">
+                <span class="text-gray-600">Sort by:</span>
+                <select class="px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                    <option>Newest</option>
+                    <option>Popular</option>
+                    <option>A-Z</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Project 1 -->
+            <div class="project-card bg-white rounded-xl overflow-hidden shadow-md" data-category="ml">
+                <div class="h-48 bg-gradient-to-r from-blue-400 to-purple-500 flex items-center justify-center">
+                    <i class="fas fa-brain text-white text-6xl"></i>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-bold text-gray-800">Sentiment Analysis API</h3>
+                        <span class="text-xs px-2 py-1 bg-purple-100 text-purple-800 rounded-full">ML/AI</span>
+                    </div>
+                    <p class="mt-2 text-gray-600">A REST API that analyzes sentiment in text using NLP with 92% accuracy.</p>
+                    <div class="mt-4 flex flex-wrap gap-2">
+                        <span class="tech-tag text-xs px-2 py-1 bg-blue-100 text-blue-800 rounded-full">Python</span>
+                        <span class="tech-tag text-xs px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full">TensorFlow</span>
+                        <span class="tech-tag text-xs px-2 py-1 bg-green-100 text-green-800 rounded-full">Flask</span>
+                    </div>
+                    <div class="mt-6 flex justify-between items-center">
+                        <div class="flex items-center text-gray-500 text-sm">
+                            <i class="fas fa-star text-yellow-400 mr-1"></i>
+                            <span>4.8</span>
+                            <span class="mx-2">•</span>
+                            <i class="fas fa-code-branch mr-1"></i>
+                            <span>24</span>
+                        </div>
+                        <button class="view-details px-4 py-2 bg-purple-600 text-white rounded-full text-sm font-medium hover:bg-purple-700 transition" data-project="1">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card bg-white rounded-xl overflow-hidden shadow-md" data-category="web">
+                <div class="h-48 bg-gradient-to-r from-green-400 to-blue-500 flex items-center justify-center">
+                    <i class="fas fa-laptop-code text-white text-6xl"></i>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-bold text-gray-800">E-commerce Dashboard</h3>
+                        <span class="text-xs px-2 py-1 bg-blue-100 text-blue-800 rounded-full">Web</span>
+                    </div>
+                    <p class="mt-2 text-gray-600">Interactive dashboard for e-commerce analytics with real-time data visualization.</p>
+                    <div class="mt-4 flex flex-wrap gap-2">
+                        <span class="tech-tag text-xs px-2 py-1 bg-red-100 text-red-800 rounded-full">React</span>
+                        <span class="tech-tag text-xs px-2 py-1 bg-blue-100 text-blue-800 rounded-full">TypeScript</span>
+                        <span class="tech-tag text-xs px-2 py-1 bg-purple-100 text-purple-800 rounded-full">Chart.js</span>
+                    </div>
+                    <div class="mt-6 flex justify-between items-center">
+                        <div class="flex items-center text-gray-500 text-sm">
+                            <i class="fas fa-star text-yellow-400 mr-1"></i>
+                            <span>4.5</span>
+                            <span class="mx-2">•</span>
+                            <i class="fas fa-code-branch mr-1"></i>
+                            <span>18</span>
+                        </div>
+                        <button class="view-details px-4 py-2 bg-blue-600 text-white rounded-full text-sm font-medium hover:bg-blue-700 transition" data-project="2">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-card bg-white rounded-xl overflow-hidden shadow-md" data-category="data">
+                <div class="h-48 bg-gradient-to-r from-orange-400 to-pink-500 flex items-center justify-center">
+                    <i class="fas fa-chart-line text-white text-6xl"></i>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-bold text-gray-800">Stock Prediction Model</h3>
+                        <span class="text-xs px-2 py-1 bg-green-100 text-green-800 rounded-full">Data</span>
+                    </div>
+                    <p class="mt-2 text-gray-600">LSTM neural network for stock price prediction with 85% directional accuracy.</p>
+                    <div class="mt-4 flex flex-wrap gap-2">
+                        <span class="tech-tag text-xs px-2 py-1 bg-green-100 text-green-800 rounded-full">Python</span>
+                        <span class="tech-tag text-xs px-2 py-1 bg-orange-100 text-orange-800 rounded-full">PyTorch</span>
+                        <span class="tech-tag text-xs px-2 py-1 bg-blue-100 text-blue-800 rounded-full">Pandas</span>
+                    </div>
+                    <div class="mt-6 flex justify-between items-center">
+                        <div class="flex items-center text-gray-500 text-sm">
+                            <i class="fas fa-star text-yellow-400 mr-1"></i>
+                            <span>4.7</span>
+                            <span class="mx-2">•</span>
+                            <i class="fas fa-code-branch mr-1"></i>
+                            <span>32</span>
+                        </div>
+                        <button class="view-details px-4 py-2 bg-green-600 text-white rounded-full text-sm font-medium hover:bg-green-700 transition" data-project="3">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 4 -->
+            <div class="project-card bg-white rounded-xl overflow-hidden shadow-md" data-category="ml">
+                <div class="h-48 bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
+                    <i class="fas fa-robot text-white text-6xl"></i>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-bold text-gray-800">Image Classifier</h3>
+                        <span class="text-xs px-2 py-1 bg-purple-100 text-purple-800 rounded-full">ML/AI</span>
+                    </div>
+                    <p class="mt-2 text-gray-600">CNN model that classifies images into 100 categories with 94% accuracy.</p>
+                    <div class="mt-4 flex flex-wrap gap-2">
+                        <span class="tech-tag text-xs px-2 py-1 bg-green-100 text-green-800 rounded-full">Python</span>
+                        <span class="tech-tag text-xs px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full">TensorFlow</span>
+                        <span class="tech-tag text-xs px-2 py-1 bg-blue-100 text-blue-800 rounded-full">OpenCV</span>
+                    </div>
+                    <div class="mt-6 flex justify-between items-center">
+                        <div class="flex items-center text-gray-500 text-sm">
+                            <i class="fas fa-star text-yellow-400 mr-1"></i>
+                            <span>4.9</span>
+                            <span class="mx-2">•</span>
+                            <i class="fas fa-code-branch mr-1"></i>
+                            <span>45</span>
+                        </div>
+                        <button class="view-details px-4 py-2 bg-pink-600 text-white rounded-full text-sm font-medium hover:bg-pink-700 transition" data-project="4">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 5 -->
+            <div class="project-card bg-white rounded-xl overflow-hidden shadow-md" data-category="web">
+                <div class="h-48 bg-gradient-to-r from-indigo-500 to-blue-400 flex items-center justify-center">
+                    <i class="fas fa-cloud text-white text-6xl"></i>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-bold text-gray-800">Serverless API</h3>
+                        <span class="text-xs px-2 py-1 bg-blue-100 text-blue-800 rounded-full">Web</span>
+                    </div>
+                    <p class="mt-2 text-gray-600">Scalable serverless API built with AWS Lambda and API Gateway.</p>
+                    <div class="mt-4 flex flex-wrap gap-2">
+                        <span class="tech-tag text-xs px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full">JavaScript</span>
+                        <span class="tech-tag text-xs px-2 py-1 bg-orange-100 text-orange-800 rounded-full">AWS</span>
+                        <span class="tech-tag text-xs px-2 py-1 bg-gray-100 text-gray-800 rounded-full">Serverless</span>
+                    </div>
+                    <div class="mt-6 flex justify-between items-center">
+                        <div class="flex items-center text-gray-500 text-sm">
+                            <i class="fas fa-star text-yellow-400 mr-1"></i>
+                            <span>4.3</span>
+                            <span class="mx-2">•</span>
+                            <i class="fas fa-code-branch mr-1"></i>
+                            <span>12</span>
+                        </div>
+                        <button class="view-details px-4 py-2 bg-indigo-600 text-white rounded-full text-sm font-medium hover:bg-indigo-700 transition" data-project="5">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 6 -->
+            <div class="project-card bg-white rounded-xl overflow-hidden shadow-md" data-category="data">
+                <div class="h-48 bg-gradient-to-r from-teal-400 to-blue-500 flex items-center justify-center">
+                    <i class="fas fa-database text-white text-6xl"></i>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-bold text-gray-800">Data Pipeline</h3>
+                        <span class="text-xs px-2 py-1 bg-green-100 text-green-800 rounded-full">Data</span>
+                    </div>
+                    <p class="mt-2 text-gray-600">ETL pipeline processing 1M+ records daily with Airflow and Spark.</p>
+                    <div class="mt-4 flex flex-wrap gap-2">
+                        <span class="tech-tag text-xs px-2 py-1 bg-green-100 text-green-800 rounded-full">Python</span>
+                        <span class="tech-tag text-xs px-2 py-1 bg-blue-100 text-blue-800 rounded-full">Airflow</span>
+                        <span class="tech-tag text-xs px-2 py-1 bg-red-100 text-red-800 rounded-full">Spark</span>
+                    </div>
+                    <div class="mt-6 flex justify-between items-center">
+                        <div class="flex items-center text-gray-500 text-sm">
+                            <i class="fas fa-star text-yellow-400 mr-1"></i>
+                            <span>4.6</span>
+                            <span class="mx-2">•</span>
+                            <i class="fas fa-code-branch mr-1"></i>
+                            <span>28</span>
+                        </div>
+                        <button class="view-details px-4 py-2 bg-teal-600 text-white rounded-full text-sm font-medium hover:bg-teal-700 transition" data-project="6">View Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Load More Button -->
+        <div class="mt-12 text-center">
+            <button class="px-6 py-3 bg-white border border-gray-300 rounded-full font-medium text-gray-700 hover:bg-gray-50 hover:shadow-md transition">
+                Load More Projects
+            </button>
+        </div>
+    </main>
+
+    <!-- Project Modal -->
+    <div id="project-modal" class="project-modal hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="sticky top-0 bg-white p-4 border-b flex justify-between items-center">
+                <h2 class="text-2xl font-bold" id="modal-title">Project Details</h2>
+                <button id="close-modal" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            <div class="p-6">
+                <div class="h-64 bg-gradient-to-r from-blue-400 to-purple-500 rounded-lg mb-6 flex items-center justify-center">
+                    <i class="fas fa-project-diagram text-white text-8xl" id="modal-icon"></i>
+                </div>
+                <div class="flex justify-between items-start mb-6">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800" id="modal-project-name">Project Name</h3>
+                        <p class="text-gray-600" id="modal-category">Category</p>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-star text-yellow-400 mr-1"></i>
+                        <span id="modal-rating">0.0</span>
+                        <span class="mx-2">•</span>
+                        <i class="fas fa-code-branch mr-1"></i>
+                        <span id="modal-forks">0</span>
+                    </div>
+                </div>
+                <p class="text-gray-700 mb-6" id="modal-description">Project description goes here.</p>
+                
+                <div class="mb-6">
+                    <h4 class="font-bold text-lg mb-3">Technologies Used</h4>
+                    <div class="flex flex-wrap gap-2" id="modal-technologies">
+                        <!-- Filled by JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <h4 class="font-bold text-lg mb-3">Key Features</h4>
+                    <ul class="list-disc pl-5 space-y-2 text-gray-700" id="modal-features">
+                        <!-- Filled by JavaScript -->
+                    </ul>
+                </div>
+                
+                <div class="flex flex-wrap gap-3">
+                    <a href="#" class="px-4 py-2 bg-blue-600 text-white rounded-full font-medium hover:bg-blue-700 transition flex items-center">
+                        <i class="fab fa-github mr-2"></i> View Code
+                    </a>
+                    <a href="#" class="px-4 py-2 bg-purple-600 text-white rounded-full font-medium hover:bg-purple-700 transition flex items-center">
+                        <i class="fas fa-external-link-alt mr-2"></i> Live Demo
+                    </a>
+                    <a href="#" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-full font-medium hover:bg-gray-300 transition flex items-center">
+                        <i class="fas fa-book mr-2"></i> Documentation
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between">
+                <div class="mb-8 md:mb-0">
+                    <h3 class="text-xl font-bold mb-4">Tech Projects Hub</h3>
+                    <p class="text-gray-400 max-w-md">Showcasing innovative technology and machine learning projects from developers around the world.</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+                    <div>
+                        <h4 class="font-bold mb-4">Explore</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Projects</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Developers</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Technologies</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-4">Resources</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Documentation</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Tutorials</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Blog</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-4">Connect</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-gray-400 hover:text-white transition text-xl"><i class="fab fa-github"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-white transition text-xl"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-white transition text-xl"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-white transition text-xl"><i class="fab fa-discord"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
+                <p>© 2023 Tech Projects Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Project data
+        const projects = {
+            1: {
+                name: "Sentiment Analysis API",
+                category: "ML/AI",
+                description: "A powerful REST API that analyzes sentiment in text using state-of-the-art natural language processing techniques. The model was trained on a dataset of 500,000 labeled reviews and achieves 92% accuracy in sentiment classification (positive/negative/neutral).",
+                rating: "4.8",
+                forks: "24",
+                icon: "fa-brain",
+                technologies: ["Python", "TensorFlow", "Flask", "NLTK", "BERT"],
+                features: [
+                    "Real-time sentiment analysis with low latency",
+                    "Supports multiple languages",
+                    "Custom model training endpoint",
+                    "Scalable microservice architecture",
+                    "Detailed sentiment scores and confidence levels"
+                ]
+            },
+            2: {
+                name: "E-commerce Dashboard",
+                category: "Web",
+                description: "A comprehensive analytics dashboard for e-commerce businesses that provides real-time insights into sales, customer behavior, and inventory. The dashboard integrates with multiple e-commerce platforms and payment processors to give a unified view of business performance.",
+                rating: "4.5",
+                forks: "18",
+                icon: "fa-laptop-code",
+                technologies: ["React", "TypeScript", "Chart.js", "Node.js", "MongoDB"],
+                features: [
+                    "Interactive data visualizations",
+                    "Custom report generation",
+                    "Real-time sales tracking",
+                    "Customer segmentation analysis",
+                    "Mobile-responsive design"
+                ]
+            },
+            3: {
+                name: "Stock Prediction Model",
+                category: "Data",
+                description: "An LSTM-based neural network that predicts stock price movements with 85% directional accuracy. The model analyzes historical price data, technical indicators, and news sentiment to generate predictions for the next trading day.",
+                rating: "4.7",
+                forks: "32",
+                icon: "fa-chart-line",
+                technologies: ["Python", "PyTorch", "Pandas", "NumPy", "Alpha Vantage API"],
+                features: [
+                    "Multi-timeframe analysis (daily, weekly, monthly)",
+                    "News sentiment integration",
+                    "Backtesting framework",
+                    "Risk assessment metrics",
+                    "Real-time data pipeline"
+                ]
+            },
+            4: {
+                name: "Image Classifier",
+                category: "ML/AI",
+                description: "A convolutional neural network that classifies images into 100 different categories with 94% accuracy. The model was trained on the ImageNet dataset and can be fine-tuned for specific use cases.",
+                rating: "4.9",
+                forks: "45",
+                icon: "fa-robot",
+                technologies: ["Python", "TensorFlow", "OpenCV", "Keras", "NumPy"],
+                features: [
+                    "Transfer learning support",
+                    "Real-time classification via webcam",
+                    "Batch processing for large datasets",
+                    "Model interpretability visualizations",
+                    "REST API endpoint"
+                ]
+            },
+            5: {
+                name: "Serverless API",
+                category: "Web",
+                description: "A highly scalable serverless API built on AWS Lambda and API Gateway. The architecture supports millions of requests per day with automatic scaling and pay-per-use pricing.",
+                rating: "4.3",
+                forks: "12",
+                icon: "fa-cloud",
+                technologies: ["JavaScript", "AWS Lambda", "API Gateway", "DynamoDB", "Serverless Framework"],
+                features: [
+                    "JWT authentication",
+                    "Rate limiting",
+                    "Automated CI/CD pipeline",
+                    "Comprehensive logging",
+                    "Cost monitoring dashboard"
+                ]
+            },
+            6: {
+                name: "Data Pipeline",
+                category: "Data",
+                description: "An ETL pipeline that processes over 1 million records daily from various sources. The pipeline uses Airflow for orchestration and Spark for distributed processing, with data quality checks at each stage.",
+                rating: "4.6",
+                forks: "28",
+                icon: "fa-database",
+                technologies: ["Python", "Airflow", "Spark", "PostgreSQL", "AWS S3"],
+                features: [
+                    "Incremental data loading",
+                    "Data quality monitoring",
+                    "Error handling and recovery",
+                    "Metadata tracking",
+                    "Scalable architecture"
+                ]
+            }
+        };
+
+        // Filter projects
+        document.getElementById('filter-all').addEventListener('click', () => filterProjects('all'));
+        document.getElementById('filter-ml').addEventListener('click', () => filterProjects('ml'));
+        document.getElementById('filter-web').addEventListener('click', () => filterProjects('web'));
+        document.getElementById('filter-data').addEventListener('click', () => filterProjects('data'));
+
+        function filterProjects(category) {
+            const projectCards = document.querySelectorAll('.project-card');
+            
+            projectCards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Update active filter button
+            document.querySelectorAll('[id^="filter-"]').forEach(btn => {
+                btn.classList.remove('bg-white', 'text-purple-700');
+                btn.classList.add('bg-white', 'bg-opacity-20');
+            });
+            
+            if (category === 'all') {
+                document.getElementById('filter-all').classList.add('bg-white', 'text-purple-700');
+                document.getElementById('filter-all').classList.remove('bg-opacity-20');
+            } else {
+                document.getElementById(`filter-${category}`).classList.add('bg-white', 'text-purple-700');
+                document.getElementById(`filter-${category}`).classList.remove('bg-opacity-20');
+            }
+        }
+
+        // Modal functionality
+        const modal = document.getElementById('project-modal');
+        const closeModal = document.getElementById('close-modal');
+        const viewDetailsButtons = document.querySelectorAll('.view-details');
+
+        viewDetailsButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const projectId = button.dataset.project;
+                const project = projects[projectId];
+                
+                // Set modal content
+                document.getElementById('modal-title').textContent = project.name;
+                document.getElementById('modal-project-name').textContent = project.name;
+                document.getElementById('modal-category').textContent = project.category;
+                document.getElementById('modal-description').textContent = project.description;
+                document.getElementById('modal-rating').textContent = project.rating;
+                document.getElementById('modal-forks').textContent = project.forks;
+                document.getElementById('modal-icon').className = `fas ${project.icon} text-white text-8xl`;
+                
+                // Set technologies
+                const techContainer = document.getElementById('modal-technologies');
+                techContainer.innerHTML = '';
+                project.technologies.forEach(tech => {
+                    const span = document.createElement('span');
+                    span.className = 'tech-tag text-xs px-2 py-1 bg-blue-100 text-blue-800 rounded-full';
+                    span.textContent = tech;
+                    techContainer.appendChild(span);
+                });
+                
+                // Set features
+                const featuresContainer = document.getElementById('modal-features');
+                featuresContainer.innerHTML = '';
+                project.features.forEach(feature => {
+                    const li = document.createElement('li');
+                    li.textContent = feature;
+                    featuresContainer.appendChild(li);
+                });
+                
+                // Show modal
+                modal.classList.remove('hidden');
+                modal.classList.add('visible');
+            });
+        });
+
+        closeModal.addEventListener('click', () => {
+            modal.classList.remove('visible');
+            modal.classList.add('hidden');
+        });
+
+        // Close modal when clicking outside
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('visible');
+                modal.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
